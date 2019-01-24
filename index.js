@@ -253,9 +253,9 @@ exports.build = async ({ files, workPath, entrypoint }) => {
           ],
         };
 
-        const staticFiles = await glob('static/locales/**/*', workPath)
-
-        console.log('!!!!!!!!!!!!!!!', staticFiles)
+        const staticFiles = await glob('static/locales/*', workPath)
+        console.log('-=====-====-', workPath)
+        console.log('-=====-====-', staticFiles)
 
         console.log(`Creating lambda for page: "${page}"...`);
         lambdas[path.join(entryDirectory, pathname)] = await createLambda({
