@@ -89,10 +89,10 @@ exports.build = async ({ files, workPath, entrypoint }) => {
     filesOnlyEntryDirectory,
     entryDirectory,
   );
-  const filesWithoutStaticDirectory = excludeStaticDirectory(
-    filesWithEntryDirectoryRoot,
-  );
-  const downloadedFiles = await download(filesWithoutStaticDirectory, workPath);
+  // const filesWithoutStaticDirectory = excludeStaticDirectory(
+  //   filesWithEntryDirectoryRoot,
+  // );
+  const downloadedFiles = await download(filesWithEntryDirectoryRoot, workPath);
 
   const pkg = await readPackageJson(downloadedFiles);
 
@@ -253,9 +253,7 @@ exports.build = async ({ files, workPath, entrypoint }) => {
           ],
         };
 
-        const staticFiles = await glob('static/locales/*', workPath)
-        console.log('-=====-====-', workPath)
-        console.log('-=====-====-', staticFiles)
+        const staticFiles = await glob('static/locales/**/*.json', workPath)
 
         console.log(`Creating lambda for page: "${page}"...`);
         lambdas[path.join(entryDirectory, pathname)] = await createLambda({
